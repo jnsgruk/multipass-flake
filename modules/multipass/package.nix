@@ -23,7 +23,7 @@ in
     preConfigure = ''
       substituteInPlace ./CMakeLists.txt \
         --replace "determine_version(MULTIPASS_VERSION)" "" \
-        --replace "set(MULTIPASS_VERSION ''${MULTIPASS_VERSION})" "set(MULTIPASS_VERSION v${version})"
+        --replace 'set(MULTIPASS_VERSION ''${MULTIPASS_VERSION})' 'set(MULTIPASS_VERSION "v${version}")'
 
       substituteInPlace ./src/platform/backends/qemu/linux/qemu_platform_detail_linux.cpp \
         --replace "OVMF.fd" "${pkgs.OVMF.fd}/FV/OVMF.fd"
