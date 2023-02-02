@@ -16,9 +16,8 @@ in
       owner = "canonical";
       repo = "multipass";
       rev = "refs/tags/v${version}";
-      sha256 = "sha256-3/WPjVTUx/a4sAKbH+R+vHZIivx9s+JSQs0PB+6z/c8=";
+      sha256 = "sha256-2d8piIIecoSI3BfOgAVlXl5P2UYDaNlxUgHXWbnSdkg=";
       fetchSubmodules = true;
-      leaveDotGit = true;
     };
 
     preConfigure = ''
