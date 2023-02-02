@@ -10,7 +10,7 @@ This flake is not supported or endorsed by Canonical in any way, it is just a pe
 
 1. Add the flake as an input to your system config flake:
 
-```nix
+```
 ...
 inputs = {
     multipass = {
@@ -23,7 +23,7 @@ inputs = {
 
 2. Make sure the module is added to your system configuration:
 
-```nix
+```
 ...
 nixosConfigurations = {
     thor = nixpkgs.lib.nixosSystem {
