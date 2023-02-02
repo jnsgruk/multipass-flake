@@ -1,5 +1,5 @@
 {
-  description = "multipass flake";
+  description = "nixos multipass flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -11,22 +11,19 @@
     nixpkgs,
     flake-utils,
     ...
-  }: let
-    inherit (self) outputs;
-  in
+  }:
     flake-utils.lib.eachDefaultSystem (
       system: let
+        inherit (self) outputs;
         pkgs = nixpkgs.legacyPackages.${system};
       in rec {
         packages = {
-          multipass = pkgs.libsForQt5.callPackage ./multipass.nix {inherit outputs;};
+          multipass = pkgs.libsForQt5.callPackage ./modules/multipass/package.nix {};
           default = packages.multipass;
         };
 
-        apps.default = {
-          type = "app";
-          program = "${packages.multipass}/bin/multipass";
-        };
+        nixosModule = import ./modules/multipass;
+        nixosModules.default = self.nixosModule.${system};
       }
     );
 }

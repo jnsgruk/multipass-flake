@@ -16,7 +16,7 @@ in
       owner = "canonical";
       repo = "multipass";
       rev = "refs/tags/v${version}";
-      sha256 = "sha256-m9Oh3izZswgBQnAEbD9ZB3x6T2akuYR34ARivar4A5Q=";
+      sha256 = "sha256-3/WPjVTUx/a4sAKbH+R+vHZIivx9s+JSQs0PB+6z/c8=";
       fetchSubmodules = true;
       leaveDotGit = true;
     };
@@ -64,7 +64,6 @@ in
         qemu-utils
         xterm
       ])}
-
     '';
 
     meta = with lib; {

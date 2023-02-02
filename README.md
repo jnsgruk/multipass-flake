@@ -1,15 +1,52 @@
 # multipass-flake
 
-> This is very much a work-in-progress!
+This is a Nix Flake for Canonical's [Multipass](https://multipass.run). You can use this flake
+to build/install the `multipass` package, or you can use it with your NixOS system to enable
+multipass as a virtualisation provider.
 
-An experimental nix flake for Canonical Multipass.
+This flake is not supported or endorsed by Canonical in any way, it is just a personal project.
 
-## Quick start
+## Use this flake on NixOS
 
-The default package is charmcraft, which you can build/test with:
+1. Add the flake as an input to your system config flake:
 
-```bash
-$ git clone https://github.com/jnsgruk/multipass-flake
-$ cd multipass-flake
-$ nix build .#
+```nix
+...
+inputs = {
+    multipass = {
+      url = "github:jnsgruk/multipass-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+}
+...
 ```
+
+2. Make sure the module is added to your system configuration:
+
+```nix
+...
+nixosConfigurations = {
+    thor = nixpkgs.lib.nixosSystem {
+        ...
+        modules = [
+            multipass.nixosModule."x86_64-linux"
+            ...
+        ];
+    };
+};
+...
+```
+
+3. Enable multipass in your NixOS system configuration:
+
+```
+virtualisation.multipass.enable = true;
+```
+
+4. Reload your nix configuration, you may need to run `systemctl start multipass`
+
+## Caveats
+
+Not many. I don't think this will work out of the box on non-amd64 machines without tweaking
+the patches/paths for the OVMF/bios files for QEMU. I don't have access to such machines and have
+not tested it.
