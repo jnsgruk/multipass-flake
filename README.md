@@ -1,5 +1,8 @@
 # multipass-flake
 
+> **This repo is now archived, as its contents are included in nixpkgs/nixos itself. See this
+> [PR](https://github.com/NixOS/nixpkgs/pull/214193) for more details.**
+
 This is a Nix Flake for Canonical's [Multipass](https://multipass.run). You can use this flake
 to build/install the `multipass` package, or you can use it with your NixOS system to enable
 multipass as a virtualisation provider.

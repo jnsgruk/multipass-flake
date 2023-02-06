@@ -6,19 +6,21 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    ...
-  }:
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    , ...
+    }:
     flake-utils.lib.eachDefaultSystem (
-      system: let
+      system:
+      let
         inherit (self) outputs;
         pkgs = nixpkgs.legacyPackages.${system};
-      in rec {
+      in
+      rec {
         packages = {
-          multipass = pkgs.libsForQt5.callPackage ./modules/multipass/package.nix {};
+          multipass = pkgs.libsForQt5.callPackage ./modules/multipass/package.nix { };
           default = packages.multipass;
         };
 
